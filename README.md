@@ -1,11 +1,11 @@
-# Skopia_NET
+# Projeto SmartRecruiters
 
 
 A API ControleLancamento foi contruida da seguinte forma:
 
 	* net 8 - Devido ser uma versão de suporte de longo tempo pela microsoft e ser a mais recente lançada;
 	
-	* Sqlite - Foi escolhido esse banco pela sua portabilidade e devido a sua criação ser um arquivo com final .db e o banco é executado de forma local;
+	* MariaDB - Foi escolhido esse banco pela sua facilidade de utilização;
 	
 	* EntityFramework - Foi escolhido esse ORM para que o banco de dados ficasse "desacoplado", facilitando uma migração de banco bastando alterar o drive de conexão. Além disso, facilita a interação com a base de dados, podendo utilizar o LINQ para interações com a base e sem precisar "re-escrever" nunhuma instrução junto ao banco ;
 	
@@ -29,7 +29,7 @@ A API ControleLancamento foi contruida da seguinte forma:
 Para a execução do serviço, basta executa-lo, pois irá aplicar a criação do banco de dados autimaticamente, pois foi configurado para que o migration execute na subida da aplicação e caso não tenha o banco ou nenhuma alteração aplicada no banco, será atualizado.
 
 	
-	Para execução no docker, basta executar o comando docker-compose up --build no diretório que o código foi baixado
+	Para execução no docker, basta executar o comando docker-compose up 
 
         Temos cadastrados 2 usuários com perfis diferentes:
 		* Manager - Carlos, com Uuid - 5cb61a7e-2c0b-41ca-a03b-18d01c0daa3f
