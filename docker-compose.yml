@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./Back/src/SmartRecruiters.Api.Api
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=server=db;port=3306;database=smartrecruiters;user=root;password=MyStrongPassword!
+    depends_on:
+      - db
+    networks:
+      - smartrecruiters-net
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: smartrecruiters
+      MYSQL_ROOT_PASSWORD: MyStrongPassword!
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - smartrecruiters-net
+
+volumes:
+  dbdata:
+
+networks:
+  smartrecruiters-net:
+    driver: bridge

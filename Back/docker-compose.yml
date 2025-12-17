@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: SmartRecruiters.Api.Api/Dockerfile
+    container_name: smartrecruiters_api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mariadb
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__MariaDb: "Server=mariadb;Port=3306;Database=smartrecruiters;User=root;Password=123456;"
+    networks:
+      - smart_net
+
+  mariadb:
+    image: mariadb:11
+    container_name: smartrecruiters_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: smartrecruiters
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - smart_net
+
+volumes:
+  mariadb_data:
+
+networks:
+  smart_net:
+    driver: bridge
